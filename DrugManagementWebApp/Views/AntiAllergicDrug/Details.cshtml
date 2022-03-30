@@ -1,0 +1,36 @@
+﻿@model DrugManagementWebApp.Models.AntiAllergicDrug
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Anti-Allergic Drug Details</h1>
+
+<div>
+    <h4>Anti-Allergic Drug</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AntiAllDrugShortName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AntiAllDrugShortName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AntiAllDrugLongName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AntiAllDrugLongName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AntiAllDrugDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AntiAllDrugDescription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.AntiAllergicDrugId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

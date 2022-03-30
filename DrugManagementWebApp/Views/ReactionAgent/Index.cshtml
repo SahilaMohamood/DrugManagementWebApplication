@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DrugManagementWebApp.Models.ReactionAgent>
+
+@{
+    ViewData["Title"] = "Index";
+    PagerModel pager = ViewBag.Pager;
+}
+
+
+<h1>Reaction Agent</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReactAgentShortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReactAgentDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReactAgentShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReactAgentDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReactionAgentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReactionAgentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReactionAgentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>

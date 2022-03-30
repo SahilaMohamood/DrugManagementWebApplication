@@ -1,0 +1,47 @@
+﻿@model DrugManagementWebApp.Models.Drug
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Drug</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DrugShortName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DrugShortName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DrugLongName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DrugLongName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DrugDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DrugDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChemicalAnalysis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChemicalAnalysis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UsageConditionDrugs)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UsageConditionDrugs.CondtnDescription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

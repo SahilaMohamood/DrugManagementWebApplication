@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DrugManagementWebApp.Models.Drug>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugShortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugLongName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChemicalAnalysis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageConditionDrugs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugLongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChemicalAnalysis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsageConditionDrugs.CondtnDescription)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.DrugId">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

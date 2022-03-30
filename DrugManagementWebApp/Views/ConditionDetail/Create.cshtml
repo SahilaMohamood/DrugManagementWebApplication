@@ -1,0 +1,50 @@
+﻿@model DrugManagementWebApp.Models.ConditionDetail
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Condition Detail Create</h1>
+
+<h4>Condition Detail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+               @Html.LabelFor(model => model.ConditionName,htmlAttributes: new { @class = "control-label col-md-2"})
+               <div class="col-md-10">
+                   <label class="radio-inline">
+                       @Html.RadioButtonFor(model =>model.ConditionName,"Beginning", new { @name = "conditionName" })
+                       Beginning
+                   </label>
+                   <label class="radio-inline">
+                       @Html.RadioButtonFor(model =>model.ConditionName,"Advanced", new { @name = "conditionName" })
+                       Advanced
+                   </label>
+                   <label class="radio-inline">
+                       @Html.RadioButtonFor(model =>model.ConditionName,"Acute", new { @name = "conditionName" })
+                       Acute
+                   </label>
+               </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConditionDescription" class="control-label"></label>
+                <input asp-for="ConditionDescription" class="form-control" />
+                <span asp-validation-for="ConditionDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

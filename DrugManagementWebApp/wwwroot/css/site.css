@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: lightblue;
+}
+.IndexDiv {
+    position: fixed;
+    top: 8%;
+    left: 0;
+    min-height: 85%;
+    min-width: 100%;
+    background-color: lightblue;
+}
+
+.IndexH1 {
+    font-family: emoji;
+    font-weight: bold;
+    color: midnightblue;
+}

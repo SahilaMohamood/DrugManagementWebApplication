@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DrugManagementWebApp.Models.ConditionDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    PagerModel pager = ViewBag.Pager;
+}
+
+
+<h1>Condition Detail</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConditionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConditionDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConditionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConditionDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ConditionDetailId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ConditionDetailId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ConditionDetailId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>

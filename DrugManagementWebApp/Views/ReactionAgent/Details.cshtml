@@ -1,0 +1,36 @@
+﻿@model DrugManagementWebApp.Models.ReactionAgent
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Reaction Agent Details</h1>
+
+<div>
+    <h4>Reaction Agent</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReactAgentShortName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReactAgentShortName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReactAgentLongName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReactAgentLongName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReactAgentDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReactAgentDescription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ReactionAgentId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

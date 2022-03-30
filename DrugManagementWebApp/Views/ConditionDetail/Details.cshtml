@@ -1,0 +1,30 @@
+﻿@model DrugManagementWebApp.Models.ConditionDetail
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Condition Detail Details</h1>
+
+<div>
+    <h4>Condition Detail</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ConditionName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ConditionName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ConditionDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ConditionDescription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ConditionDetailId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
