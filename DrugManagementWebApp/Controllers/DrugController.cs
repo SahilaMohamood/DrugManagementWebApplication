@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DrugManagementWebApp.Data;
 using DrugManagementWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrugManagementWebApp.Controllers
 {
+    [Authorize]
     public class DrugController : Controller
     {
         private readonly ApplicationContext _context;
@@ -23,8 +25,7 @@ namespace DrugManagementWebApp.Controllers
         // GET: Drugs
         public async Task<IActionResult> Index()
         {
-            var applicationContext = _context.Drugs.Include(d => d.UsageConditionDrugs);
-            return View(await applicationContext.ToListAsync());
+            return View(await _context.Drugs.OrderByDescending(x=>x.DrugId).Include(x=>x.UsageConditionDrugs).ToListAsync());
         }
 
         // GET: Drugs/Details/5
@@ -49,25 +50,19 @@ namespace DrugManagementWebApp.Controllers
         // GET: Drugs/Create
         public IActionResult Create()
         {
-            ViewData["UsageConditionDrugId"] = new SelectList(_context.UsageConditionDrugs, "UsageConditionDrugId", "CondtnDescription");
+            ViewBag.UsageConditionDrugId = new SelectList(_context.UsageConditionDrugs, "UsageConditionDrugId", "CondtnDescription");
             return View();
         }
 
         // POST: Drugs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DrugId,DrugShortName,DrugLongName,DrugDescription,ChemicalAnalysis,UsageConditionDrugId")] Drug drug)
+        public async Task<IActionResult> Create(Drug drug)
         {
-            if (ModelState.IsValid)
-            {
+            
                 _context.Add(drug);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["UsageConditionDrugId"] = new SelectList(_context.UsageConditionDrugs, "UsageConditionDrugId", "CondtnDescription", drug.UsageConditionDrugId);
-            return View(drug);
+                return RedirectToAction("Index");
         }
 
     }

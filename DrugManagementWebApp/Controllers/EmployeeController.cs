@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DrugManagementWebApp.Data;
 using DrugManagementWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrugManagementWebApp.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly ApplicationContext _context;
@@ -23,9 +25,7 @@ namespace DrugManagementWebApp.Controllers
         // GET: Employee
         public async Task<IActionResult> Index()
         {
-
-            var applicationContext = _context.Employees.Include(e => e.Departments);
-            return View(await applicationContext.ToListAsync());
+            return View(await _context.Employees.OrderByDescending(x => x.EmployeeId).Include(x => x.Departments).ToListAsync());
         }
 
         // GET: Employee/Details/5
@@ -50,23 +50,18 @@ namespace DrugManagementWebApp.Controllers
         // GET: Employee/Create
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DeptName");
+            ViewBag.DepartmentId = new SelectList(_context.Departments, "DepartmentId", "DeptName");
             return View();
         }
 
         // POST: Employee/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,EmpName,DateOfBirth,Address,PhoneNo,EmailId,Gender,DateOfJoining,Designation,DepartmentId")] Employee employee)
+        public async Task<IActionResult> Create(Employee employee)
         {
-            if (ModelState.IsValid)
-            {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DeptName", employee.DepartmentId);
-            return View(employee);
+                return RedirectToAction("Index");
         }
 
        

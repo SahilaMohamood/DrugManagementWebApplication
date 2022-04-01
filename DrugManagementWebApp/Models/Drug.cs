@@ -23,9 +23,11 @@ namespace DrugManagementWebApp.Models
         [Display(Name = "Chemical Analysis")]
         public string ChemicalAnalysis { get; set; }
         [Required]
-        [ForeignKey("UsageConditionDrugs")]
         [Display(Name = "Usage Condition Drug")]
         public int UsageConditionDrugId { get; set; }
+
+
+        [ForeignKey("UsageConditionDrugId")]
         public virtual UsageConditionDrug UsageConditionDrugs { get; set; }
     }
 }

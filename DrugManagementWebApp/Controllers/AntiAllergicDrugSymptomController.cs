@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DrugManagementWebApp.Data;
 using DrugManagementWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrugManagementWebApp.Controllers
 {
+    [Authorize]
     public class AntiAllergicDrugSymptomController : Controller
     {
         private readonly ApplicationContext _context;
@@ -23,8 +25,7 @@ namespace DrugManagementWebApp.Controllers
         // GET: AntiAllergicDrugSymptom
         public async Task<IActionResult> Index()
         {
-            var applicationContext = _context.AntiAllergicDrugSymptoms.Include(a => a.AntiAllergicDrugs);
-            return View(await applicationContext.ToListAsync());
+            return View(await _context.AntiAllergicDrugSymptoms.OrderByDescending(x => x.AntiAllergicDrugId).Include(x => x.AntiAllergicDrugs).ToListAsync());
         }
 
         // GET: AntiAllergicDrugSymptom/Details/5
@@ -49,25 +50,20 @@ namespace DrugManagementWebApp.Controllers
         // GET: AntiAllergicDrugSymptom/Create
         public IActionResult Create()
         {
-            ViewData["AntiAllergicDrugId"] = new SelectList(_context.AntiAllergicDrugs, "AntiAllergicDrugId", "AntiAllDrugShortName");
+            ViewBag.AntiAllergicDrugId = new SelectList(_context.AntiAllergicDrugs, "AntiAllergicDrugId", "AntiAllDrugShortName");
             return View();
         }
 
         // POST: AntiAllergicDrugSymptom/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AntiAllergicDrugSymptomId,Name,Description,AntiAllergicDrugId")] AntiAllergicDrugSymptom antiAllergicDrugSymptom)
+        public async Task<IActionResult> Create(AntiAllergicDrugSymptom antiAllergicDrugSymptom)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(antiAllergicDrugSymptom);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AntiAllergicDrugId"] = new SelectList(_context.AntiAllergicDrugs, "AntiAllergicDrugId", "AntiAllDrugShortName", antiAllergicDrugSymptom.AntiAllergicDrugId);
-            return View(antiAllergicDrugSymptom);
+            
+            _context.Add(antiAllergicDrugSymptom);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
        

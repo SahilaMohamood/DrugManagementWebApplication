@@ -40,22 +40,22 @@
                 <select asp-for="DrugId" class ="form-control" asp-items="ViewBag.DrugId"></select>
             </div>
             <div class="form-group">
-               @Html.LabelFor(model => model.TrailResult,htmlAttributes: new { @class = "control-label col-md-2"})
+               @Html.LabelFor(model => model.Status,htmlAttributes: new { @class = "control-label col-md-2"})
                <div class="col-md-10">
                    <label class="radio-inline">
-                       @Html.RadioButtonFor(model =>model.TrailResult,"InProgress", new { @name = "trailResult" })
+                       @Html.RadioButtonFor(model =>model.Status,"InProgress", new { @name = "status" })
                        InProgress
                    </label>
                    <label class="radio-inline">
-                       @Html.RadioButtonFor(model =>model.TrailResult,"Completed", new { @name = "trailResult" })
+                       @Html.RadioButtonFor(model =>model.Status,"Completed", new { @name = "status" })
                        Completed
                    </label>
                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <label asp-for="TrailResult" class="control-label"></label>
+                <input asp-for="TrailResult" class="form-control" />
+                <span asp-validation-for="TrailResult" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

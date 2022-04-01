@@ -20,28 +20,28 @@ namespace DrugManagementWebApp.Controllers
         {
             _repository = repo;
         }
-        //Read method of the CRUD Operation . It Lists all data from the units table
+        //Read method of the CRUD Operation . It Lists all data from the table
         public IActionResult Index(string SearchText = "", int pg = 1, int pageSize = 3)
         {
             ViewBag.SearchText = SearchText;
 
             PaginatedList<AntiAllergicDrug> antiAllergicDrugs = _repository.GetItems(SearchText, pg, pageSize);
 
-            //int totRecs = ((PaginatedList<AntiAllergicDrug>)AntiAllergicDrugs).TotalRecords;
-
+            
             var pager = new PagerModel(antiAllergicDrugs.TotalRecords, pg, pageSize);
             this.ViewBag.Pager = pager;
 
-            //AntiAllergicDrugs =AntiAllergicDrugs.Skip((pg-1)*pageSize).Take(pageSize).ToList();
 
             return View(antiAllergicDrugs);
         }
-
+        //GET
         public IActionResult Create()
         {
             AntiAllergicDrug antiAllergicDrug = new AntiAllergicDrug();
             return View(antiAllergicDrug);
         }
+
+        //POST
 
         [HttpPost]
         public IActionResult Create(AntiAllergicDrug antiAllergicDrug)
@@ -55,7 +55,7 @@ namespace DrugManagementWebApp.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        //GET
         public IActionResult Details(int id)
         {
             AntiAllergicDrug antiAllergicDrug = _repository.GetAntiAllergicDrug(id);

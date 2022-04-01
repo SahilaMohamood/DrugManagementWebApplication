@@ -15,9 +15,10 @@ namespace DrugManagementWebApp.Models
         [Display(Name = "Description")]
         public string Description { get; set; }
         [Required]
-        [ForeignKey("AntiAllergicDrugs")]
         [Display(Name = "Anti Allergic Drug")]
         public int AntiAllergicDrugId { get; set; }
+
+        [ForeignKey("AntiAllergicDrugId")]
         public virtual AntiAllergicDrug AntiAllergicDrugs { get; set; }
 
     }

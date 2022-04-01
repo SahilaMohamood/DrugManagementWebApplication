@@ -19,19 +19,17 @@ namespace DrugManagementWebApp.Controllers
         {
             _repository = repo;
         }
-        //Read method of the CRUD Operation . It Lists all data from the units table
+        //Read method of the CRUD Operation . It Lists all data from the table
         public IActionResult Index(string SearchText = "",int pg=1,int pageSize = 3)
         {
             ViewBag.SearchText = SearchText;
 
             PaginatedList<Department> departments = _repository.GetItems(SearchText,pg,pageSize);
 
-            //int totRecs = ((PaginatedList<Department>)departments).TotalRecords;
 
             var pager = new PagerModel(departments.TotalRecords, pg, pageSize);
             this.ViewBag.Pager = pager;
 
-            //departments =departments.Skip((pg-1)*pageSize).Take(pageSize).ToList();
 
             return View(departments);
         }

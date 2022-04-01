@@ -18,15 +18,12 @@ namespace DrugManagementWebApp.Models
         [StringLength(25)]
         public string Purpose { get; set; }
         [Required]
-        [ForeignKey("Employees")]
         [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
         [Required]
-        [ForeignKey("Patients")]
         [Display(Name = "Patient")]
         public int PatientId { get; set; }
-        [Required]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-        [ForeignKey("Drugs")]
+        [Required]
         [Display(Name = "Drug")]
         public int DrugId { get; set; }
         [Required]
@@ -38,8 +35,16 @@ namespace DrugManagementWebApp.Models
         [StringLength(20)]
         public string Status { get; set; }
 
+
+        [ForeignKey("EmployeeId")]
         public virtual Employee Employees { get; set; }
+
+
+        [ForeignKey("PatientId")]
         public virtual Patient Patients { get; set; }
+
+
+        [ForeignKey("DrugId")]
         public virtual Drug Drugs { get; set; }
     }
 }

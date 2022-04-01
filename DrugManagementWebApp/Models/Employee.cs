@@ -37,10 +37,11 @@ namespace DrugManagementWebApp.Models
         [StringLength(30)]
         public string Designation { get; set; }
         [Required]
-        [ForeignKey("Departments")]
         [Display(Name ="Department")]
-        public int DepartmentId { get; set; }    
-     
+        public int DepartmentId { get; set; }
+
+
+        [ForeignKey("DepartmentId")]
         public virtual Department Departments { get; set; }
     }
 }

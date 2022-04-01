@@ -27,12 +27,10 @@ namespace DrugManagementWebApp.Controllers
 
             PaginatedList<Patient> patients = _repository.GetItems(SearchText, pg, pageSize);
 
-            //int totRecs = ((PaginatedList<Patient>)Patients).TotalRecords;
 
             var pager = new PagerModel(patients.TotalRecords, pg, pageSize);
             this.ViewBag.Pager = pager;
 
-            //Patients =Patients.Skip((pg-1)*pageSize).Take(pageSize).ToList();
 
             return View(patients);
         }
